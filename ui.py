@@ -130,6 +130,12 @@ def get_inputs(list_labels, title):
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
     inputs = []
+    print(title)
+    for item in list_labels:
+        answer = ''
+        while answer == '':
+            answer = input(item)
+        inputs.append(answer)
 
     # your code
 
@@ -146,5 +152,5 @@ def print_error_message(message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
+    print(message)
     # your code
