@@ -42,10 +42,8 @@ def show_table(table):
     Returns:
         None
     """
-
-    elements = data_manager.get_table_from_file(table)
     title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
-    ui.print_table(elements, title_list)
+    common.show_every_table(table, title_list)
 
 
 def add(table):
