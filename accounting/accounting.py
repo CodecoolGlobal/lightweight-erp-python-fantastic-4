@@ -46,6 +46,9 @@ def show_table(table):
     common.show_every_table(table, title_list)
 
 
+show_table('accounting/items.csv')
+
+
 def add(table):
     """
     Asks user for input and adds it into the table.

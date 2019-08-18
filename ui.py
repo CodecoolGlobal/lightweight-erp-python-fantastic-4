@@ -59,6 +59,7 @@ def print_table(table, title_list):
         print_table += (columns + whitespace_border * 2) * '-'
 
     print_table += (len(columns_length) - 1) * '-' + '/'
+    print(print_table)
 
 
 def print_result(result, label):
