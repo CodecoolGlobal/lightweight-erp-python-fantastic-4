@@ -1,7 +1,5 @@
 """ User Interface (UI) module """
-
-a = [['1', '2', '3'], ['4', '5', '6']]
-b = ['-2', '-1', '0']
+import common
 
 
 def print_table(table, title_list):
@@ -24,9 +22,43 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
+    columns_length = []
     table.insert(0, title_list)
-    for i in table:
-        print(i)
+    for column_index, column in enumerate(table[0]):
+        current_max_item_length = 0
+        current_column = common.get_column(table, column_index)
+        for item in current_column:
+            if current_max_item_length < len(item):
+                current_max_item_length = len(item)
+        columns_length.append(current_max_item_length)
+
+    print_table = '/'
+    whitespace_border = 1
+
+    for columns_index, columns in enumerate(columns_length):
+        print_table += (columns + whitespace_border * 2) * '-'
+
+    print_table += (len(columns_length) - 1) * '-' + '\\\n'
+    for line_index, line in enumerate(table):
+        for item_index, item in enumerate(line):
+            before_spaceing = ' ' * \
+                ((columns_length[item_index] - len(item)) // 2)
+            after_spaceing = ' ' * \
+                ((columns_length[item_index] - len(item)) // 2)
+            if (columns_length[item_index] - len(item)) % 2 == 1:
+                after_spaceing += ' '
+            print_table += '|' + whitespace_border * ' ' + before_spaceing + \
+                item + after_spaceing + whitespace_border * ' '
+        print_table += '|\n'
+        if line_index != len(table) - 1:
+            for columns in columns_length:
+                print_table += '|' + (columns + whitespace_border * 2) * '-'
+            print_table += '|\n'
+    print_table += '\\'
+    for columns_index, columns in enumerate(columns_length):
+        print_table += (columns + whitespace_border * 2) * '-'
+
+    print_table += (len(columns_length) - 1) * '-' + '/'
     # your goes code
 
 
@@ -107,6 +139,3 @@ def print_error_message(message):
     """
 
     # your code
-
-
-print_table(a, b)
