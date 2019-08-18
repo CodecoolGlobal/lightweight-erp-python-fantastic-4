@@ -43,7 +43,9 @@ def show_table(table):
         None
     """
 
-    # your code
+    elements = data_manager.get_table_from_file(table)
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
+    ui.print_table(elements, title_list)
 
 
 def add(table):
