@@ -42,7 +42,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ['ID', 'Name', 'Manufacturer', 'Purchase Year', 'Durability']
+    common.show_every_table(table, title_list)
 
 
 def add(table):

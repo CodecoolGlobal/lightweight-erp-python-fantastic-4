@@ -40,7 +40,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ['ID', 'Name', 'Birth year']
+    common.show_every_table(table, title_list)
 
 
 def add(table):
