@@ -14,7 +14,7 @@ def read_file(file_name):
     return filecontent
 
 
-def get_colum(given_list, column):
+def get_column(given_list, column):
     names = []
     for index, line in enumerate(given_list):
         names.append(line[column])
@@ -119,7 +119,7 @@ def generate_random(table):
     small_letters = 'abcdefghijklmnopqrstuvwxyz'
     capital_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     numbers = '0123456789'
-    
+
     for length in range(1):
         generated.append(small_letters[random.randrange(26)])
         generated.append(capital_letters[random.randrange(26)])
