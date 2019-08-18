@@ -46,7 +46,7 @@ def print_table(table, title_list):
             after_spaceing = ' ' * \
                 ((columns_length[item_index] - len(item)) // 2)
             if (columns_length[item_index] - len(item)) % 2 == 1:
-                after_spaceing += ' '
+                before_spaceing += ' '
             print_table += '|' + whitespace_border * ' ' + before_spaceing + \
                 item + after_spaceing + whitespace_border * ' '
         print_table += '|\n'
