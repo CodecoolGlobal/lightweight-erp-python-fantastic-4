@@ -1,5 +1,8 @@
 """ User Interface (UI) module """
 
+a = [['1', '2', '3'], ['4', '5', '6']]
+b = ['-2', '-1', '0']
+
 
 def print_table(table, title_list):
     """
@@ -21,7 +24,9 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
+    table.insert(0, title_list)
+    for i in table:
+        print(i)
     # your goes code
 
 
@@ -102,3 +107,6 @@ def print_error_message(message):
     """
 
     # your code
+
+
+print_table(a, b)
