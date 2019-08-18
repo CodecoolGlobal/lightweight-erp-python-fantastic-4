@@ -74,7 +74,13 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    if isinstance(result, str):
+        print(label + result)
+    else:
+        print(label)
+        for item in result:
+            print(item)
+        # your code
 
 
 def print_menu(title, list_options, exit_message):
