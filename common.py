@@ -115,8 +115,17 @@ def generate_random(table):
         string: Random and unique string
     """
 
-    generated = ''
-
-    # your code
-
-    return generated
+    generated = []
+    small_letters = 'abcdefghijklmnopqrstuvwxyz'
+    capital_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    numbers = '0123456789'
+    
+    for length in range(1):
+        generated.append(small_letters[random.randrange(26)])
+        generated.append(capital_letters[random.randrange(26)])
+        generated.append(numbers[random.randrange(10)])
+        generated.append(numbers[random.randrange(10)])
+        generated.append(capital_letters[random.randrange(26)])
+        generated.append(small_letters[random.randrange(26)])
+        generated.append("#&")
+    return ''.join(generated)
