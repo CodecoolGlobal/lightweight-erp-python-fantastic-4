@@ -46,7 +46,7 @@ def print_table(table, title_list):
             after_spaceing = ' ' * \
                 ((columns_length[item_index] - len(item)) // 2)
             if (columns_length[item_index] - len(item)) % 2 == 1:
-                after_spaceing += ' '
+                before_spaceing += ' '
             print_table += '|' + whitespace_border * ' ' + before_spaceing + \
                 item + after_spaceing + whitespace_border * ' '
         print_table += '|\n'
@@ -59,7 +59,7 @@ def print_table(table, title_list):
         print_table += (columns + whitespace_border * 2) * '-'
 
     print_table += (len(columns_length) - 1) * '-' + '/'
-    # your goes code
+    print(print_table)
 
 
 def print_result(result, label):
@@ -97,8 +97,11 @@ def print_menu(title, list_options, exit_message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
-    # your code
+    print_out = title + '\n'
+    for line in list_options:
+        print_out += '    ' + line + '\n'
+    print_out += '    ' + exit_message
+    print(print_out)
 
 
 def get_inputs(list_labels, title):
