@@ -27,16 +27,17 @@ def start_module():
     Returns:
         None
     """
-
-    show_table('store/games.csv')
+    filename = 'store/games.csv'
+    show_table(filename)
     options = ['Add record', 'Remove record', 'Update record']
     while True:
         try:
             ui.print_menu("Store manager", options, "Exit program")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
+            filecontent = data_manager.get_table_from_file(filename)
             if option == "1":
-                pass
+                filecontent = add(filecontent)
             elif option == "2":
                 pass
             elif option == "3":
@@ -45,6 +46,7 @@ def start_module():
                 break
             else:
                 raise KeyError("There is no such option.")
+            data_manager.write_table_to_file(filename, filecontent)
             show_table('store/games.csv')
         except KeyError as err:
             show_table('store/games.csv')
@@ -78,7 +80,6 @@ def add(table):
     """
 
     # your code
-
     return table
 
 
