@@ -138,3 +138,10 @@ def generate_random(table):
 def show_every_table(table, title_list):
     elements = data_manager.get_table_from_file(table)
     ui.print_table(elements, title_list)
+
+
+def my_sum_(number_list):
+    result = 0
+    for item in number_list:
+        result += item
+    return result
