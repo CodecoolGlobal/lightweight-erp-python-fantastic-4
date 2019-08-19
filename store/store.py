@@ -52,12 +52,14 @@ def start_module():
             elif option == "4":
                 ui.print_result(get_counts_by_manufacturers(
                     filecontent).items(), 'Game count by manufacturer:')
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
                 manufacturer_name = ui.get_inputs(
                     ['Name: '], 'Enter the manufacturer\'s name'
                 )[0]
                 ui.print_result(str(get_average_by_manufacturer(
                     filecontent, manufacturer_name)), 'Game count by manufacturer: ')
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
             elif option == '':

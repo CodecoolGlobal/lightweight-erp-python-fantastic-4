@@ -48,6 +48,7 @@ def start_module():
             elif option == "4":
                 ui.print_result(get_lowest_price_item_id(
                     filecontent), "ID of the item with the lowest priceing: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
                 from_date = ui.get_inputs(
                     ['Month: ', 'Day: ', 'Year: '], 'Enter the starting date')
@@ -63,6 +64,7 @@ def start_module():
                     str(from_date[2]) + ' and ' + str(to_date[0]) + '.' +
                     str(to_date[1]) + '.' + str(to_date[2]) + ':'
                 )
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
             elif option == '':
