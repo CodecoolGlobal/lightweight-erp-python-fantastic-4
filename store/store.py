@@ -29,27 +29,46 @@ def start_module():
     """
     filename = 'store/games.csv'
     show_table(filename)
-    options = ['Add record', 'Remove record', 'Update record']
+    options = ['Add record', 'Remove record',
+               'Update record', 'Game count by manufacturer',
+               'Average by manufacturer']
     while True:
         try:
-            ui.print_menu("Store manager", options, "Exit program")
+            ui.print_menu("Store manager", options, "Back to menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             filecontent = data_manager.get_table_from_file(filename)
             if option == "1":
                 filecontent = add(filecontent)
             elif option == "2":
-                pass
+                remove_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to remove item from the list'
+                )[0]
+                remove(filecontent, remove_id)
             elif option == "3":
-                pass
+                update_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to update item in the list'
+                )[0]
+                update(filecontent, update_id)
+            elif option == "4":
+                ui.print_result(get_counts_by_manufacturers(
+                    filecontent).items(), 'Game count by manufacturer:')
+            elif option == "5":
+                manufacturer_name = ui.get_inputs(
+                    ['Name: '], 'Enter the manufacturer\'s name'
+                )[0]
+                ui.print_result(str(get_average_by_manufacturer(
+                    filecontent, manufacturer_name)), 'Game count by manufacturer: ')
             elif option == "0":
                 break
+            elif option == '':
+                raise KeyError("Please enter a valid input")
             else:
                 raise KeyError("There is no such option.")
             data_manager.write_table_to_file(filename, filecontent)
-            show_table('store/games.csv')
+            show_table(filename)
         except KeyError as err:
-            show_table('store/games.csv')
+            show_table(filename)
             ui.print_error_message(str(err))
 
 
@@ -79,7 +98,13 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    title_list = ['ID', 'Title', 'Manufacturer', 'Price', 'In stock']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+    new_line.insert(0, common.generate_random(table))
+    table.append(new_line)
     return table
 
 
@@ -94,8 +119,16 @@ def remove(table, id_):
     Returns:
         list: Table without specified record.
     """
+    id_found = False
 
-    # your code
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            table.pop(line_index)
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
@@ -112,7 +145,22 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    id_found = False
+    title_list = ['ID', 'Title', 'Manufacturer', 'Price', 'In stock']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            new_line.insert(0, line[0])
+            table[line_index] = new_line
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
@@ -130,8 +178,14 @@ def get_counts_by_manufacturers(table):
     Returns:
          dict: A dictionary with this structure: { [manufacturer] : [count] }
     """
-
-    # your code
+    games_by_manufacturer = {}
+    manufacturers = common.get_column(table, 2)
+    for manufacturer in manufacturers:
+        if manufacturer in games_by_manufacturer:
+            games_by_manufacturer[manufacturer] += 1
+        else:
+            games_by_manufacturer[manufacturer] = 1
+    return games_by_manufacturer
 
 
 def get_average_by_manufacturer(table, manufacturer):
@@ -146,4 +200,20 @@ def get_average_by_manufacturer(table, manufacturer):
          number
     """
 
-    # your code
+    manufacturer_found = False
+    manufacturer_column = 2
+    in_stock_column = 4
+    manufacturer_table = []
+    for line in table:
+        if manufacturer in line[manufacturer_column]:
+            manufacturer_table.append(line)
+            manufacturer_found = True
+
+    if manufacturer_found is False:
+        raise KeyError('Manufacturer not found')
+
+    manufacturer_in_stock = common.get_column(
+        manufacturer_table, in_stock_column)
+    for item_index, item in enumerate(manufacturer_in_stock):
+        manufacturer_in_stock[item_index] = int(item)
+    return (common.my_sum_(manufacturer_in_stock) / len(manufacturer_in_stock))
