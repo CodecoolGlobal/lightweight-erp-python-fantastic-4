@@ -132,10 +132,7 @@ def get_inputs(list_labels, title):
     inputs = []
     print(title)
     for item in list_labels:
-        answer = ''
-        while answer == '':
-            answer = input(item)
-        inputs.append(answer)
+        inputs.append(input(item))
 
     # your code
 
