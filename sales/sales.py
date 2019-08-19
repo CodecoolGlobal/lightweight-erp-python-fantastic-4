@@ -53,12 +53,15 @@ def start_module():
                     ['Month: ', 'Day: ', 'Year: '], 'Enter the starting date')
                 to_date = ui.get_inputs(
                     ['Month: ', 'Day: ', 'Year: '], 'Enter the ending date')
+                from_date = common.value_converter_list(from_date)
+                to_date = common.value_converter_list(to_date)
                 ui.print_result(
                     get_items_sold_between(
-                        filecontent, from_date[0], from_date[1], from_date[2], to_date[0], to_date[1], to_date[2]),
-                    'These items have benn sold between ' + from_date[0] + '.' + from_date[1] + '.' + from_date[2] +
-                    ' and ' + to_date[0] + '.' +
-                    to_date[1] + '.' + to_date[2] + ':'
+                        filecontent, from_date[0], from_date[1],
+                        from_date[2], to_date[0], to_date[1], to_date[2]),
+                    'These items have benn sold between ' + str(from_date[0]) + '.' + str(from_date[1]) + '.' +
+                    str(from_date[2]) + ' and ' + str(to_date[0]) + '.' +
+                    str(to_date[1]) + '.' + str(to_date[2]) + ':'
                 )
             elif option == "0":
                 break
@@ -196,8 +199,8 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     day_column = 4
     year_column = 5
     filtered_table = []
-    table = common.value_converter_nest(table)
-    for line in table:
+    converted_table = common.value_converter_nest(table)
+    for line in converted_table:
         if year_from < line[year_column] and line[year_column] < year_to:
             filtered_table.append(line)
         elif year_from == line[year_column] or line[year_column] == year_to:

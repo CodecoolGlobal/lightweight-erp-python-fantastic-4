@@ -149,13 +149,20 @@ def my_sum_(number_list):
 
 
 def value_converter_list(stringlist):
-    for index, item in enumerate(stringlist):
+    temp = []
+    for item in stringlist:
         if item.isdigit():
-            stringlist[index] = int(item)
-    return stringlist
+            temp.append(int(item))
+        else:
+            temp.append(item)
+    return temp
 
 
 def value_converter_nest(nested_string_list):
-    for lisTindex, lisT in enumerate(nested_string_list):
-        nested_string_list[lisTindex] = value_converter_list(lisT)
-    return nested_string_list
+    nested_temp = []
+    for nest in nested_string_list:
+        nested_temp.append(value_converter_list(nest))
+    return nested_temp
+
+
+print(value_converter_nest([['123', '213'], ['21', '123']]))
