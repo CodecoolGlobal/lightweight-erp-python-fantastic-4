@@ -148,9 +148,9 @@ def my_sum_(number_list):
     return result
 
 
-def value_converter_list(stringlist):
+def value_converter_list(string_list):
     temp = []
-    for item in stringlist:
+    for item in string_list:
         if item.isdigit():
             temp.append(int(item))
         else:
@@ -165,4 +165,15 @@ def value_converter_nest(nested_string_list):
     return nested_temp
 
 
-print(value_converter_nest([['123', '213'], ['21', '123']]))
+def string_value_converter_list(int_list):
+    temp = []
+    for item in int_list:
+        temp.append(str(item))
+    return temp
+
+
+def string_value_converter_nest(nested_int_list):
+    nested_temp = []
+    for nest in nested_int_list:
+        nested_temp.append(string_value_converter_list(nest))
+    return nested_temp

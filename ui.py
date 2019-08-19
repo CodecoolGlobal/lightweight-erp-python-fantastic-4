@@ -76,6 +76,14 @@ def print_result(result, label):
 
     if isinstance(result, str):
         print(label + result)
+    elif result == []:
+        print('\nNo result')
+    elif isinstance(result, list) and isinstance(result[0], list):
+        string_result = common.string_value_converter_nest(result)
+        fake_title = string_result.pop(0)
+        print('\n' + label)
+        print_table(string_result, fake_title)
+        print('\n')
     else:
         print(label)
         for item in result:
