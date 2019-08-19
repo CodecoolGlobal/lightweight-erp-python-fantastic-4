@@ -27,7 +27,36 @@ def start_module():
         None
     """
 
-    # your code
+    filename = 'crm/customers.csv'
+    show_table(filename)
+    options = ['Add record', 'Remove record', 'Update record', 'ID of longest customer', 'Subscribed customers']
+    while True:
+        try:
+            ui.print_menu("Store manager", options, "Back to menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            filecontent = data_manager.get_table_from_file(filename)
+            if option == "1":
+                filecontent = add(filecontent)
+            elif option == "2":
+                pass
+            elif option == "3":
+                pass
+            elif option == "4":
+                pass
+            elif option == "5":
+                pass
+            elif option == "0":
+                break
+            elif option == '':
+                raise KeyError("Please enter a valid input")
+            else:
+                raise KeyError("There is no such option.")
+            data_manager.write_table_to_file(filename, filecontent)
+            show_table(filename)
+        except KeyError as err:
+            show_table(filename)
+            ui.print_error_message(str(err))
 
 
 def show_table(table):

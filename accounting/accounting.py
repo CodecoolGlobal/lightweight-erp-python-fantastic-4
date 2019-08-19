@@ -50,12 +50,14 @@ def start_module():
                 pass
             elif option == "0":
                 break
+            elif option == '':
+                raise KeyError("Please enter a valid input")
             else:
                 raise KeyError("There is no such option.")
             data_manager.write_table_to_file(filename, filecontent)
-            show_table('accounting/items.csv')
+            show_table(filename)
         except KeyError as err:
-            show_table('accounting/items.csv')
+            show_table(filename)
             ui.print_error_message(str(err))
 
 
