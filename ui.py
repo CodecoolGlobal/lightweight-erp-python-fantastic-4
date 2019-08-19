@@ -74,7 +74,13 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    if isinstance(result, str):
+        print(label + result)
+    else:
+        print(label)
+        for item in result:
+            print(item)
+        # your code
 
 
 def print_menu(title, list_options, exit_message):
@@ -98,9 +104,9 @@ def print_menu(title, list_options, exit_message):
         None: This function doesn't return anything it only prints to console.
     """
     print_out = title + '\n'
-    for line in list_options:
-        print_out += '    ' + line + '\n'
-    print_out += '    ' + exit_message
+    for line_index, line in enumerate(list_options):
+        print_out += '    ' + '(' + str(line_index + 1) + ') ' + line + '\n'
+    print_out += '    ' + '(0) ' + exit_message
     print(print_out)
 
 
@@ -124,6 +130,12 @@ def get_inputs(list_labels, title):
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
     inputs = []
+    print(title)
+    for item in list_labels:
+        answer = ''
+        while answer == '':
+            answer = input(item)
+        inputs.append(answer)
 
     # your code
 
@@ -140,5 +152,5 @@ def print_error_message(message):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
+    print(message)
     # your code
