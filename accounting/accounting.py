@@ -29,7 +29,34 @@ def start_module():
         None
     """
 
-    # you code
+    filename = 'accounting/items.csv'
+    show_table(filename)
+    options = ['Add record', 'Remove record', 'Update record', 'Highest profit year', 'Avarage profit in a given year']
+    while True:
+        try:
+            ui.print_menu("Store manager", options, "Back to menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            filecontent = data_manager.get_table_from_file(filename)
+            if option == "1":
+                filecontent = add(filecontent)
+            elif option == "2":
+                pass
+            elif option == "3":
+                pass
+            elif option == "4":
+                pass
+            elif option == "5":
+                pass
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+            data_manager.write_table_to_file(filename, filecontent)
+            show_table('accounting/items.csv')
+        except KeyError as err:
+            show_table('accounting/items.csv')
+            ui.print_error_message(str(err))
 
 
 def show_table(table):
@@ -44,9 +71,6 @@ def show_table(table):
     """
     title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
     common.show_every_table(table, title_list)
-
-
-show_table('accounting/items.csv')
 
 
 def add(table):
