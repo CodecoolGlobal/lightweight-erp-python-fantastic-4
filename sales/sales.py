@@ -52,8 +52,14 @@ def start_module():
             elif option == "5":
                 from_date = ui.get_inputs(
                     ['Month: ', 'Day: ', 'Year: '], 'Enter the starting date')
+                for item in from_date:
+                    if item.isdigit() is False:
+                        raise KeyError("Please enter a valid input")
                 to_date = ui.get_inputs(
-                    ['Month: ', 'Day: ', 'Year: '], 'Enter the ending date')
+                    ['Month: ', 'Day: ', 'Year: '], '\nEnter the ending date')
+                for item in to_date:
+                    if item.isdigit() is False:
+                        raise KeyError("Please enter a valid input")
                 from_date = common.value_converter_list(from_date)
                 to_date = common.value_converter_list(to_date)
                 ui.print_result(
