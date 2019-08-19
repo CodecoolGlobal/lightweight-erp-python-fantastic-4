@@ -28,7 +28,27 @@ def start_module():
         None
     """
 
-    # your code
+    show_table('store/games.csv')
+    options = ['Add record', 'Remove record', 'Update record']
+    while True:
+        try:
+            ui.print_menu("Store manager", options, "Exit program")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                pass
+            elif option == "2":
+                pass
+            elif option == "3":
+                pass
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+            show_table('store/games.csv')
+        except KeyError as err:
+            show_table('store/games.csv')
+            ui.print_error_message(str(err))
 
 
 def show_table(table):
@@ -44,7 +64,6 @@ def show_table(table):
 
     title_list = ['ID', 'Title', 'Manufacturer', 'Price', 'In stock']
     common.show_every_table(table, title_list)
-
 
 
 def add(table):
