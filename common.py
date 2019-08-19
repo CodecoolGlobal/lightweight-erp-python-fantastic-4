@@ -5,6 +5,7 @@ implement commonly used functions here
 import random
 import ui
 import data_manager
+import hr
 
 
 def read_file(file_name):

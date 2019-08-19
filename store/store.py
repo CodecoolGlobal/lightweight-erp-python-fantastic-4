@@ -29,9 +29,8 @@ def start_module():
     """
     filename = 'store/games.csv'
     show_table(filename)
-    options = ['Add record', 'Remove record',
-               'Update record', 'Game count by manufacturer',
-               'Average by manufacturer']
+    options = ['Add record', 'Remove record', 'Update record', 'Count of games by manufacturer',
+               'Avarage in stock games by manufacturer']
     while True:
         try:
             ui.print_menu("Store manager", options, "Back to menu")
