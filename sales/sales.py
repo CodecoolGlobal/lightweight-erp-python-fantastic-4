@@ -49,7 +49,17 @@ def start_module():
                 ui.print_result(get_lowest_price_item_id(
                     filecontent), "ID of the item with the lowest priceing: ")
             elif option == "5":
-                pass
+                from_date = ui.get_inputs(
+                    ['Month: ', 'Day: ', 'Year: '], 'Enter the starting date')
+                to_date = ui.get_inputs(
+                    ['Month: ', 'Day: ', 'Year: '], 'Enter the ending date')
+                ui.print_result(
+                    get_items_sold_between(
+                        filecontent, from_date[0], from_date[1], from_date[2], to_date[0], to_date[1], to_date[2]),
+                    'These items have benn sold between ' + from_date[0] + '.' + from_date[1] + '.' + from_date[2] +
+                    ' and ' + to_date[0] + '.' +
+                    to_date[1] + '.' + to_date[2] + ':'
+                )
             elif option == "0":
                 break
             elif option == '':
@@ -182,4 +192,18 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         list: list of lists (the filtered table)
     """
 
-    # your code
+    month_column = 3
+    day_column = 4
+    year_column = 5
+    filtered_table = []
+    table = common.value_converter_nest(table)
+    for line in table:
+        if year_from < line[year_column] and line[year_column] < year_to:
+            filtered_table.append(line)
+        elif year_from == line[year_column] or line[year_column] == year_to:
+            if month_from < line[month_column] and line[month_column] < month_to:
+                filtered_table.append(line)
+            elif month_from == line[month_column] or line[month_column] == month_to:
+                if day_from < line[day_column] and line[day_column] < day_to:
+                    filtered_table.append(line)
+    return filtered_table
