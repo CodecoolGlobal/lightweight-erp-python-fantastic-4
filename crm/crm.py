@@ -43,7 +43,6 @@ def show_table(table):
     title_list = ['ID', 'Name', 'Email', 'Subscribed']
     common.show_every_table(table, title_list)
 
-show_table('crm/customers.csv')
 
 def add(table):
     """
