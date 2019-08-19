@@ -72,7 +72,7 @@ def bubblesort_number(x, y, reversed=True):
     return x, y
 
 
-def my_sort(given_list):  # only works with list of strings
+def my_sort_(given_list):  # only works with list of strings
     hierarchy = (
         '\t', ' ', ':', '-', ',', '&', '(', ')', ',',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
