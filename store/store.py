@@ -29,10 +29,11 @@ def start_module():
     """
     filename = 'store/games.csv'
     show_table(filename)
-    options = ['Add record', 'Remove record', 'Update record']
+    options = ['Add record', 'Remove record', 'Update record', 'Count of games by manufacturer',
+               'Avarage in stock games by manufacturer']
     while True:
         try:
-            ui.print_menu("Store manager", options, "Exit program")
+            ui.print_menu("Store manager", options, "Back to menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             filecontent = data_manager.get_table_from_file(filename)
@@ -42,14 +43,20 @@ def start_module():
                 pass
             elif option == "3":
                 pass
+            elif option == "4":
+                pass
+            elif option == "5":
+                pass
             elif option == "0":
                 break
+            elif option == '':
+                raise KeyError("Please enter a valid input")
             else:
                 raise KeyError("There is no such option.")
             data_manager.write_table_to_file(filename, filecontent)
-            show_table('store/games.csv')
+            show_table(filename)
         except KeyError as err:
-            show_table('store/games.csv')
+            show_table(filename)
             ui.print_error_message(str(err))
 
 

@@ -5,6 +5,7 @@ implement commonly used functions here
 import random
 import ui
 import data_manager
+import hr
 
 
 def read_file(file_name):
@@ -137,4 +138,3 @@ def generate_random(table):
 def show_every_table(table, title_list):
     elements = data_manager.get_table_from_file(table)
     ui.print_table(elements, title_list)
-
