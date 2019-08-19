@@ -104,9 +104,9 @@ def print_menu(title, list_options, exit_message):
         None: This function doesn't return anything it only prints to console.
     """
     print_out = title + '\n'
-    for line in list_options:
-        print_out += '    ' + line + '\n'
-    print_out += '    ' + exit_message
+    for line_index, line in enumerate(list_options):
+        print_out += '    ' + '(' + str(line_index + 1) + ') ' + line + '\n'
+    print_out += '    ' + '(0) ' + exit_message
     print(print_out)
 
 
