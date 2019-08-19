@@ -31,7 +31,8 @@ def start_module():
 
     filename = 'sales/sales.csv'
     show_table(filename)
-    options = ['Add record', 'Remove record', 'Update record', 'ID of lowest price item', 'Items sold between inverval']
+    options = ['Add record', 'Remove record', 'Update record',
+               'ID of lowest price item', 'Items sold between inverval']
     while True:
         try:
             ui.print_menu("Store manager", options, "Back to menu")
@@ -45,7 +46,8 @@ def start_module():
             elif option == "3":
                 pass
             elif option == "4":
-                pass
+                ui.print_result(get_lowest_price_item_id(
+                    filecontent), "ID of the item with the lowest priceing: ")
             elif option == "5":
                 pass
             elif option == "0":
@@ -141,7 +143,26 @@ def get_lowest_price_item_id(table):
          string: id
     """
 
-    # your code
+    id_column = 0
+    name_column = 1
+    price_column = 2
+    sorted_names = []
+    sorted_lowest_table = []
+    lowest_price = int(table[0][price_column])
+    for line in table:
+        sorted_names.append(line[name_column])
+        if int(line[price_column]) < lowest_price:
+            lowest_price = int(line[price_column])
+    sorted_names = common.my_sort_(sorted_names)
+    for name in sorted_names:
+        for line in table:
+            if name == line[name_column] and int(line[price_column]) == lowest_price:
+                sorted_lowest_table.append(line)
+                break
+    if len(sorted_lowest_table) == 1:
+        return sorted_lowest_table[0][id_column]
+    else:
+        return sorted_lowest_table[-1][id_column]
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
