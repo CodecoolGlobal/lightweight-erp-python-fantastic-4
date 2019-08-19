@@ -121,17 +121,16 @@ def generate_random(table):
     small_letters = 'abcdefghijklmnopqrstuvwxyz'
     capital_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     numbers = '0123456789'
-    generated = ''
+    generated = current_ids[0]
     while generated in current_ids:
         randomlist = []
-        for length in range(1):
-            randomlist.append(small_letters[random.randrange(26)])
-            randomlist.append(capital_letters[random.randrange(26)])
-            randomlist.append(numbers[random.randrange(10)])
-            randomlist.append(numbers[random.randrange(10)])
-            randomlist.append(capital_letters[random.randrange(26)])
-            randomlist.append(small_letters[random.randrange(26)])
-            randomlist.append("#&")
+        randomlist.append(small_letters[random.randrange(26)])
+        randomlist.append(capital_letters[random.randrange(26)])
+        randomlist.append(numbers[random.randrange(10)])
+        randomlist.append(numbers[random.randrange(10)])
+        randomlist.append(capital_letters[random.randrange(26)])
+        randomlist.append(small_letters[random.randrange(26)])
+        randomlist.append("#&")
         generated = ''.join(randomlist)
     return generated
 
