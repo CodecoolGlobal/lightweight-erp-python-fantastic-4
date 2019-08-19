@@ -117,24 +117,25 @@ def generate_random(table):
         string: Random and unique string
     """
 
-    randomlist = []
+    current_ids = get_column(table, 0)
     small_letters = 'abcdefghijklmnopqrstuvwxyz'
     capital_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     numbers = '0123456789'
-
-    for length in range(1):
-        randomlist.append(small_letters[random.randrange(26)])
-        randomlist.append(capital_letters[random.randrange(26)])
-        randomlist.append(numbers[random.randrange(10)])
-        randomlist.append(numbers[random.randrange(10)])
-        randomlist.append(capital_letters[random.randrange(26)])
-        randomlist.append(small_letters[random.randrange(26)])
-        randomlist.append("#&")
-    generated = ''.join(randomlist)
+    generated = ''
+    while generated in current_ids:
+        randomlist = []
+        for length in range(1):
+            randomlist.append(small_letters[random.randrange(26)])
+            randomlist.append(capital_letters[random.randrange(26)])
+            randomlist.append(numbers[random.randrange(10)])
+            randomlist.append(numbers[random.randrange(10)])
+            randomlist.append(capital_letters[random.randrange(26)])
+            randomlist.append(small_letters[random.randrange(26)])
+            randomlist.append("#&")
+        generated = ''.join(randomlist)
     return generated
 
 
 def show_every_table(table, title_list):
     elements = data_manager.get_table_from_file(table)
     ui.print_table(elements, title_list)
-
