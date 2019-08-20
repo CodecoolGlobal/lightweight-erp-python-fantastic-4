@@ -50,7 +50,9 @@ def start_module():
                     filecontent, year), "Items have not exceeded their durability: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                pass
+                ui.print_result(get_average_durability_by_manufacturers(
+                    filecontent).items(), "Avarage durability by manufacturers: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
             elif option == '':
@@ -162,4 +164,16 @@ def get_average_durability_by_manufacturers(table):
         dict: a dictionary with this structure: { [manufacturer] : [avg] }
     """
 
-    # your code
+    manufacturer_column = 2
+    durability_column = 4
+    manufacturers = {}
+    for line in table:
+        if line[manufacturer_column] not in manufacturers:
+            manufacturers[line[manufacturer_column]] = [
+                1, int(line[durability_column])]
+        else:
+            manufacturers[line[manufacturer_column]] = [manufacturers[line[manufacturer_column]]
+                                                        [0] + 1, manufacturers[line[manufacturer_column]][1] + int(line[durability_column])]
+    for key, value in manufacturers.items():
+        manufacturers[key] = value[1] / value[0]
+    return manufacturers
