@@ -31,7 +31,7 @@ def start_module():
     filename = 'inventory/inventory.csv'
     show_table(filename)
     options = ['Add record', 'Remove record', 'Update record', 'Get available items',
-    'Get avarage durability by manufacturers']
+               'Get avarage durability by manufacturers']
     while True:
         try:
             ui.print_menu("Store manager", options, "Back to menu")
@@ -45,7 +45,10 @@ def start_module():
             elif option == "3":
                 pass
             elif option == "4":
-                pass
+                year = int(ui.get_inputs(['Enter '], ' ')[0])
+                ui.print_result(get_available_items(
+                    filecontent, year), "Items have not exceeded their durability: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
                 pass
             elif option == "0":
@@ -138,7 +141,14 @@ def get_available_items(table, year):
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
 
-    # your code
+    durability_column = 4
+    year_column = 3
+    filtered_list = []
+    for line in table:
+        if year <= int(line[year_column]) + int(line[durability_column]):
+            filtered_list.append(line)
+    filtered_list = common.value_converter_nest(filtered_list)
+    return filtered_list
 
 
 def get_average_durability_by_manufacturers(table):
