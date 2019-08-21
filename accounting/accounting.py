@@ -55,7 +55,10 @@ def start_module():
                  "This year has the highest profit: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                pass
+                year = int(ui.get_inputs(["Year: "], "Which year's average would you like to know?")[0])
+                ui.print_result(str(round(avg_amount(filecontent, year), 2)), 
+                "This is the average for %s: " % year)
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
             elif option == '':
@@ -212,4 +215,22 @@ def avg_amount(table, year):
         number
     """
 
-    # your code
+    year_column = 3
+    type_column = 4
+    amount_column = 5
+    years = []
+    for line in table:
+        if line[year_column] not in years:
+            years.append([line[year_column], 0, 0])
+    for line in table:
+        for index, date in enumerate(years):
+            if line[year_column] == date[0] and line[type_column] == "in":
+                years[index][1] += int(line[amount_column])
+                years[index][2] += 1
+            elif line[year_column] == date[0]:
+                years[index][1] -= int(line[amount_column])
+                years[index][2] += 1
+    for date in years:
+        if int(date[0]) == year:
+            average = date[1] / date[2]
+            return average
