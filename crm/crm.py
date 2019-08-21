@@ -49,7 +49,7 @@ def start_module():
                 )[0]
                 update(filecontent, update_id)
             elif option == "4":
-                pass
+                print(get_longest_name_id(filecontent))
             elif option == "5":
                 pass
             elif option == "0":
@@ -174,7 +174,18 @@ def get_longest_name_id(table):
                 the last by alphabetical order of the names)
         """
 
-    # your code
+    names = common.get_column(table, 1)
+    ordered_names = common.my_sort_(names)
+    longest_name_len = 0
+    longest_name = ""
+    for name in ordered_names:
+        if longest_name_len <= len(name):
+            longest_name_len = len(name)
+            longest_name = name
+    id_index = 0
+    for user in table:
+        if longest_name in user:
+            return user[id_index]
 
 
 # the question: Which customers has subscribed to the newsletter?
