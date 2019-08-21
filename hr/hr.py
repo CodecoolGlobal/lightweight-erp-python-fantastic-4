@@ -46,7 +46,8 @@ def start_module():
                     filecontent), "Oldest person or people: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                pass
+                ui.print_result(get_persons_closest_to_average(filecontent), "Closest to average: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
             elif option == '':
@@ -163,4 +164,24 @@ def get_persons_closest_to_average(table):
         list: list of strings (name or names if there are two more with the same value)
     """
 
-    # your code
+    year_column = 2
+    name_column = 1
+    year_sum = 0
+    counter = 0
+    closest_to_average_year = []
+    for line in table:
+        year_sum += int(line[year_column])
+        counter += 1
+    year_average = int(year_sum/counter)
+    current_person_dif = abs(year_average-int(table[0][year_column]))
+    for line in table:
+        dif = (int(line[year_column])-year_average)
+        dif = abs(dif)
+        if current_person_dif > dif:
+            current_person_dif = dif
+    for line in table:
+        dif = (int(line[year_column])-year_average)
+        dif = abs(dif)
+        if dif == int(current_person_dif):
+            closest_to_average_year.append(line[name_column])
+    return closest_to_average_year
