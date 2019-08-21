@@ -39,7 +39,10 @@ def start_module():
             if option == "1":
                 filecontent = add(filecontent)
             elif option == "2":
-                pass
+                remove_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to remove item from the list'
+                )[0]
+                remove(filecontent, remove_id)
             elif option == "3":
                 pass
             elif option == "4":
@@ -107,7 +110,16 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    id_found = False
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            table.pop(line_index)
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
