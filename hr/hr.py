@@ -42,7 +42,9 @@ def start_module():
             elif option == "3":
                 pass
             elif option == "4":
-                pass
+                ui.print_result(get_oldest_person(
+                    filecontent), "Oldest person or people: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
                 pass
             elif option == "0":
@@ -137,7 +139,17 @@ def get_oldest_person(table):
         list: A list of strings (name or names if there are two more with the same value)
     """
 
-    # your code
+    name_column = 1
+    year_column = 2
+    sorted_oldest_people = []
+    oldest = int(table[0][year_column])
+    for line in table:
+        if int(line[year_column]) < oldest:
+            oldest = int(line[year_column])
+    for line in table:
+        if int(line[year_column]) == oldest:
+            sorted_oldest_people.append(line[name_column])
+    return sorted_oldest_people
 
 
 def get_persons_closest_to_average(table):
