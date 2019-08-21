@@ -93,11 +93,16 @@ def print_result(result, label):
         print('\n' + label)
         print_table(string_result, fake_title)
         print('\n')
+    elif isinstance(result, list):
+        for index, line in enumerate(result):
+            result[index] = [line]
+        string_result = common.string_value_converter_nest(result)
+        fake_title = string_result.pop(0)
+        print('\n' + label)
+        print_table(string_result, fake_title)
+        print('\n')
     else:
-        print(label)
-        for item in result:
-            print(item)
-        # your code
+        print_table([[str(result)]], label)
 
 
 def print_menu(title, list_options, exit_message):
