@@ -51,7 +51,7 @@ def start_module():
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
                 ui.print_result(get_average_durability_by_manufacturers(
-                    filecontent).items(), "Avarage durability by manufacturers: ")
+                    filecontent), "Avarage durability by manufacturers: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break

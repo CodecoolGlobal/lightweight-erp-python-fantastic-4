@@ -39,11 +39,17 @@ def start_module():
             if option == "1":
                 filecontent = add(filecontent)
             elif option == "2":
-                pass
+                remove_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to remove item from the list'
+                )[0]
+                remove(filecontent, remove_id)
             elif option == "3":
-                pass
+                update_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to update item in the list'
+                )[0]
+                update(filecontent, update_id)
             elif option == "4":
-                pass
+                print(get_longest_name_id(filecontent))
             elif option == "5":
                 pass
             elif option == "0":
@@ -84,7 +90,13 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    title_list = ['ID', 'Name', 'Email', 'Subscribed']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+    new_line.insert(0, common.generate_random(table))
+    table.append(new_line)
 
     return table
 
@@ -101,7 +113,16 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    id_found = False
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            table.pop(line_index)
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
@@ -118,7 +139,22 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    id_found = False
+    title_list = ['ID', 'Name', 'Email', 'Subscribed']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            new_line.insert(0, line[0])
+            table[line_index] = new_line
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
@@ -138,7 +174,18 @@ def get_longest_name_id(table):
                 the last by alphabetical order of the names)
         """
 
-    # your code
+    names = common.get_column(table, 1)
+    ordered_names = common.my_sort_(names)
+    longest_name_len = 0
+    longest_name = ""
+    for name in ordered_names:
+        if longest_name_len <= len(name):
+            longest_name_len = len(name)
+            longest_name = name
+    id_index = 0
+    for user in table:
+        if longest_name in user:
+            return user[id_index]
 
 
 # the question: Which customers has subscribed to the newsletter?
