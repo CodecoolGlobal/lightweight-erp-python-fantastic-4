@@ -84,7 +84,13 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
+    title_list = ['ID', 'Name', 'Email', 'Subscribed']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+    new_line.insert(0, common.generate_random(table))
+    table.append(new_line)
 
     return table
 
