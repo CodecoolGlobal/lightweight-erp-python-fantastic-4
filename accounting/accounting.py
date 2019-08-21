@@ -51,7 +51,9 @@ def start_module():
                 )[0]
                 update(filecontent, update_id)
             elif option == "4":
-                pass
+                ui.print_result(str(which_year_max(filecontent)),
+                 "This year has the highest profit: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
                 pass
             elif option == "0":
@@ -174,7 +176,28 @@ def which_year_max(table):
         number
     """
 
-    # your code
+    year_column = 3
+    type_column = 4
+    amount_column = 5
+    max_profit_year = 0
+    years = []
+    for line in table:
+        if line[year_column] not in years:
+            years.append([line[year_column], 0])
+    for line in table:
+        for index, year in enumerate(years):
+            if line[year_column] == year[0] and line[type_column] == "in":
+                years[index][1] += int(line[amount_column])
+            elif line[year_column] == year[0]:
+                years[index][1] -= int(line[amount_column])
+    for year in years:
+        if year[1] > max_profit_year:
+            max_profit_year = year[1]
+    for year in years:
+        if year[1] == max_profit_year:
+            return int(year[0])
+    
+
 
 
 def avg_amount(table, year):
