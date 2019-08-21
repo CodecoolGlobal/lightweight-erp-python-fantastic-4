@@ -38,13 +38,22 @@ def start_module():
             if option == "1":
                 filecontent = add(filecontent)
             elif option == "2":
-                pass
+                remove_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to remove item from the list'
+                )[0]
+                remove(filecontent, remove_id)
             elif option == "3":
-                pass
+                update_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to update item in the list'
+                )[0]
+                update(filecontent, update_id)
             elif option == "4":
-                pass
+                ui.print_result(get_oldest_person(
+                    filecontent), "Oldest person or people: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                pass
+                ui.print_result(get_persons_closest_to_average(filecontent), "Closest to average: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
             elif option == '':
@@ -84,8 +93,13 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
+    title_list = ['ID', 'Name', 'Year']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+    new_line.insert(0, common.generate_random(table))
+    table.append(new_line)
     return table
 
 
@@ -101,7 +115,16 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    id_found = False
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            table.pop(line_index)
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
@@ -118,7 +141,22 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    id_found = False
+    title_list = ['ID', 'Name', 'Year']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            new_line.insert(0, line[0])
+            table[line_index] = new_line
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
@@ -137,7 +175,17 @@ def get_oldest_person(table):
         list: A list of strings (name or names if there are two more with the same value)
     """
 
-    # your code
+    name_column = 1
+    year_column = 2
+    sorted_oldest_people = []
+    oldest = int(table[0][year_column])
+    for line in table:
+        if int(line[year_column]) < oldest:
+            oldest = int(line[year_column])
+    for line in table:
+        if int(line[year_column]) == oldest:
+            sorted_oldest_people.append(line[name_column])
+    return sorted_oldest_people
 
 
 def get_persons_closest_to_average(table):
@@ -151,4 +199,24 @@ def get_persons_closest_to_average(table):
         list: list of strings (name or names if there are two more with the same value)
     """
 
-    # your code
+    year_column = 2
+    name_column = 1
+    year_sum = 0
+    counter = 0
+    closest_to_average_year = []
+    for line in table:
+        year_sum += int(line[year_column])
+        counter += 1
+    year_average = int(year_sum/counter)
+    current_person_dif = abs(year_average-int(table[0][year_column]))
+    for line in table:
+        dif = (int(line[year_column])-year_average)
+        dif = abs(dif)
+        if current_person_dif > dif:
+            current_person_dif = dif
+    for line in table:
+        dif = (int(line[year_column])-year_average)
+        dif = abs(dif)
+        if dif == int(current_person_dif):
+            closest_to_average_year.append(line[name_column])
+    return closest_to_average_year

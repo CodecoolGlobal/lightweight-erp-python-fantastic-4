@@ -49,9 +49,11 @@ def start_module():
                 )[0]
                 update(filecontent, update_id)
             elif option == "4":
-                print(get_longest_name_id(filecontent))
+                ui.print_result(get_longest_name_id(filecontent), "The longest name's ID is: ")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                pass
+                ui.print_result(get_subscribed_emails(filecontent), "Subscribed list is: \n")
+                ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
             elif option == '':
@@ -201,4 +203,16 @@ def get_subscribed_emails(table):
             list: list of strings (where a string is like "email;name")
         """
 
-    # your code
+    name = 1
+    email = 2
+    subscription = 3
+    subscribed_list = []
+
+    for user in table:
+        if user[subscription] == '1':
+            subscribed_list.append(user[email] + ";" + user[name])
+
+    return subscribed_list
+    
+    
+
