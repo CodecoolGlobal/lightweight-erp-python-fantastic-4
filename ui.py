@@ -84,6 +84,15 @@ def print_result(result, label):
         print('\n' + label)
         print_table(string_result, fake_title)
         print('\n')
+    elif isinstance(result, dict):
+        string_result = []
+        for key, value in result.items():
+            string_result.append([key, value])
+        string_result = common.string_value_converter_nest(string_result)
+        fake_title = string_result.pop(0)
+        print('\n' + label)
+        print_table(string_result, fake_title)
+        print('\n')
     else:
         print(label)
         for item in result:

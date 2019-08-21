@@ -51,7 +51,7 @@ def start_module():
                 update(filecontent, update_id)
             elif option == "4":
                 ui.print_result(get_counts_by_manufacturers(
-                    filecontent).items(), 'Game count by manufacturer:')
+                    filecontent), 'Game count by manufacturer:')
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
                 manufacturer_name = ui.get_inputs(
