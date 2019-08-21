@@ -24,7 +24,7 @@ def get_column(given_list, column):
     return names
 
 
-def bubblesort(x, y, z=0, reversed=True):
+def bubblesort_(x, y, z=0, reversed=True):
     i = 0
     while i < len(x):
         j = 0
@@ -98,7 +98,7 @@ def my_sort_(given_list):  # only works with list of strings
                     break
         hierarchyvalues.append(indexline)
     for k in range(max_name_lenght - 2, -1, -1):
-        alphabetcontent, given_list = bubblesort(
+        alphabetcontent, given_list = bubblesort_(
             hierarchyvalues, given_list, k)
     for index, item in enumerate(given_list):
         given_list[index] = item.rstrip(' ')
