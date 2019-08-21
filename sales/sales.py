@@ -35,7 +35,7 @@ def start_module():
                'ID of lowest price item', 'Items sold between inverval']
     while True:
         try:
-            ui.print_menu("Store manager", options, "Back to menu")
+            ui.print_menu("Sales manager", options, "Back to menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             filecontent = data_manager.get_table_from_file(filename)

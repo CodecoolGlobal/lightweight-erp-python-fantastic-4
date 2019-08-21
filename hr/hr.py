@@ -28,10 +28,11 @@ def start_module():
 
     filename = 'hr/persons.csv'
     show_table(filename)
-    options = ['Add record', 'Remove record', 'Update record', 'Get oldest person', 'Get persons closest to avarage']
+    options = ['Add record', 'Remove record', 'Update record',
+               'Get oldest person', 'Get persons closest to avarage']
     while True:
         try:
-            ui.print_menu("Store manager", options, "Back to menu")
+            ui.print_menu("Human resources manager", options, "Back to menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             filecontent = data_manager.get_table_from_file(filename)
@@ -52,7 +53,8 @@ def start_module():
                     filecontent), "Oldest person or people: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                ui.print_result(get_persons_closest_to_average(filecontent), "Closest to average: ")
+                ui.print_result(get_persons_closest_to_average(
+                    filecontent), "Closest to average: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break

@@ -31,10 +31,11 @@ def start_module():
 
     filename = 'accounting/items.csv'
     show_table(filename)
-    options = ['Add record', 'Remove record', 'Update record', 'Highest profit year', 'Avarage profit in a given year']
+    options = ['Add record', 'Remove record', 'Update record',
+               'Highest profit year', 'Avarage profit in a given year']
     while True:
         try:
-            ui.print_menu("Store manager", options, "Back to menu")
+            ui.print_menu("Accounting manager", options, "Back to menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             filecontent = data_manager.get_table_from_file(filename)
@@ -52,12 +53,13 @@ def start_module():
                 update(filecontent, update_id)
             elif option == "4":
                 ui.print_result(str(which_year_max(filecontent)),
-                 "This year has the highest profit: ")
+                                "This year has the highest profit: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                year = int(ui.get_inputs(["Year: "], "Which year's average would you like to know?")[0])
-                ui.print_result(str(round(avg_amount(filecontent, year), 2)), 
-                "This is the average for %s: " % year)
+                year = int(ui.get_inputs(
+                    ["Year: "], "Which year's average would you like to know?")[0])
+                ui.print_result(str(round(avg_amount(filecontent, year), 2)),
+                                "This is the average for %s: " % year)
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
@@ -199,8 +201,6 @@ def which_year_max(table):
     for year in years:
         if year[1] == max_profit_year:
             return int(year[0])
-    
-
 
 
 def avg_amount(table, year):

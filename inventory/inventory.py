@@ -34,7 +34,7 @@ def start_module():
                'Get avarage durability by manufacturers']
     while True:
         try:
-            ui.print_menu("Store manager", options, "Back to menu")
+            ui.print_menu("Inventory manager", options, "Back to menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             filecontent = data_manager.get_table_from_file(filename)
@@ -45,7 +45,8 @@ def start_module():
             elif option == "3":
                 pass
             elif option == "4":
-                year = int(ui.get_inputs(['Enter '], ' ')[0])
+                year = int(ui.get_inputs(
+                    ['Year:'], 'Enter durability date')[0])
                 ui.print_result(get_available_items(
                     filecontent, year), "Items have not exceeded their durability: ")
                 ui.get_inputs([''], 'Press Enter to continue')

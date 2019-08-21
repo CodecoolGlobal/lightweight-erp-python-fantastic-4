@@ -29,10 +29,12 @@ def start_module():
 
     filename = 'crm/customers.csv'
     show_table(filename)
-    options = ['Add record', 'Remove record', 'Update record', 'ID of longest customer', 'Subscribed customers']
+    options = ['Add record', 'Remove record', 'Update record',
+               'ID of longest customer', 'Subscribed customers']
     while True:
         try:
-            ui.print_menu("Store manager", options, "Back to menu")
+            ui.print_menu("Customer Relationship manager",
+                          options, "Back to menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             filecontent = data_manager.get_table_from_file(filename)
@@ -49,10 +51,12 @@ def start_module():
                 )[0]
                 update(filecontent, update_id)
             elif option == "4":
-                ui.print_result(get_longest_name_id(filecontent), "The longest name's ID is: ")
+                ui.print_result(get_longest_name_id(
+                    filecontent), "The longest name's ID is: ")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "5":
-                ui.print_result(get_subscribed_emails(filecontent), "Subscribed list is: \n")
+                ui.print_result(get_subscribed_emails(
+                    filecontent), "Subscribed list is: \n")
                 ui.get_inputs([''], 'Press Enter to continue')
             elif option == "0":
                 break
@@ -213,6 +217,3 @@ def get_subscribed_emails(table):
             subscribed_list.append(user[email] + ";" + user[name])
 
     return subscribed_list
-    
-    
-
