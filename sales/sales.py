@@ -109,10 +109,8 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-
-    # your code
-
-    return table
+    title_list = ['ID', 'Title', 'Price', 'Month', 'Day', 'Year']
+    return common.all_add(table, title_list)
 
 
 def remove(table, id_):

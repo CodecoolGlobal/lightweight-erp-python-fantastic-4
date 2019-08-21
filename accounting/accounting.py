@@ -100,13 +100,8 @@ def add(table):
     """
 
     title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
-    title_list.pop(0)
-    for item_index, item in enumerate(title_list):
-        title_list[item_index] += ': '
-    new_line = ui.get_inputs(title_list, 'Enter the following items')
-    new_line.insert(0, common.generate_random(table))
-    table.append(new_line)
-    return table
+
+    return common.all_add(table, title_list)
 
 
 def remove(table, id_):
