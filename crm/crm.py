@@ -44,7 +44,10 @@ def start_module():
                 )[0]
                 remove(filecontent, remove_id)
             elif option == "3":
-                pass
+                update_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to update item in the list'
+                )[0]
+                update(filecontent, update_id)
             elif option == "4":
                 pass
             elif option == "5":
@@ -136,7 +139,22 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
+    id_found = False
+    title_list = ['ID', 'Name', 'Email', 'Subscribed']
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            new_line.insert(0, line[0])
+            table[line_index] = new_line
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
 
     return table
 
