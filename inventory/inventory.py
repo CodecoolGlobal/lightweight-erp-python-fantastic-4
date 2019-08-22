@@ -46,7 +46,10 @@ def start_module():
                 )[0]
                 remove(filecontent, remove_id)
             elif option == "3":
-                pass
+                update_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to update item in the list'
+                )[0]
+                update(filecontent, update_id)
             elif option == "4":
                 year = int(ui.get_inputs(
                     ['Year:'], 'Enter durability date')[0])
@@ -126,10 +129,9 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
+    title_list = ['ID', 'Name', 'Manufacturer', 'Purchase year', 'Durability']
 
-    # your code
-
-    return table
+    return common.all_update(table, id_, title_list)
 
 
 # special functions:

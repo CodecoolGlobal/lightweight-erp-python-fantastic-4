@@ -204,3 +204,23 @@ def all_remove(table, id_):
         raise KeyError('ID not found')
 
     return table
+
+
+def all_update(table, id_, title_list):
+    id_found = False
+    title_list.pop(0)
+    for item_index, item in enumerate(title_list):
+        title_list[item_index] += ': '
+    new_line = ui.get_inputs(title_list, 'Enter the following items')
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            new_line.insert(0, line[0])
+            table[line_index] = new_line
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
+
+    return table
