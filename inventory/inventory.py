@@ -41,7 +41,10 @@ def start_module():
             if option == "1":
                 filecontent = add(filecontent)
             elif option == "2":
-                pass
+                remove_id = ui.get_inputs(
+                    ['ID: '], 'Enter ID to remove item from the list'
+                )[0]
+                remove(filecontent, remove_id)
             elif option == "3":
                 pass
             elif option == "4":
@@ -109,9 +112,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
-
-    return table
+    return common.all_remove(table, id_)
 
 
 def update(table, id_):

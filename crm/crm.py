@@ -113,18 +113,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    id_found = False
-
-    for line_index, line in enumerate(table):
-        if line[0] == id_:
-            table.pop(line_index)
-            id_found = True
-            break
-
-    if id_found is False:
-        raise KeyError('ID not found')
-
-    return table
+    return common.all_remove(table, id_)
 
 
 def update(table, id_):

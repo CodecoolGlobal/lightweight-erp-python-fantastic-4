@@ -189,3 +189,18 @@ def all_add(table, title_list):
     new_line.insert(0, generate_random(table))
     table.append(new_line)
     return table
+
+
+def all_remove(table, id_):
+    id_found = False
+
+    for line_index, line in enumerate(table):
+        if line[0] == id_:
+            table.pop(line_index)
+            id_found = True
+            break
+
+    if id_found is False:
+        raise KeyError('ID not found')
+
+    return table
