@@ -100,8 +100,8 @@ def add(table):
     """
 
     title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
-
-    return common.all_add(table, title_list)
+    column_number_list = [1, 2, 3, 5]
+    return common.all_add(table, title_list, column_number_list)
 
 
 def remove(table, id_):
@@ -132,11 +132,12 @@ def update(table, id_):
     """
 
     title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
-    
-    return common.all_update(table, id_, title_list)
+    column_number_list = [1, 2, 3, 5]
+    return common.all_update(table, id_, title_list, column_number_list)
 
 # special functions:
 # ------------------
+
 
 def which_year_max(table):
     """

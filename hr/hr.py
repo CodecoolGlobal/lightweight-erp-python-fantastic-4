@@ -96,8 +96,8 @@ def add(table):
     """
 
     title_list = ['ID', 'Name', 'Year']
-
-    return common.all_add(table, title_list)
+    column_number_list = [2]
+    return common.all_add(table, title_list, column_number_list)
 
 
 def remove(table, id_):
@@ -128,8 +128,8 @@ def update(table, id_):
     """
 
     title_list = ['ID', 'Name', 'Year']
-
-    return common.all_update(table, id_, title_list)
+    column_number_list = [2]
+    return common.all_update(table, id_, title_list, column_number_list)
 
 
 # special functions:

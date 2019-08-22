@@ -31,7 +31,6 @@ def start_module():
     show_table(filename)
     options = ['Add record', 'Remove record', 'Update record', 'Count of games by manufacturer',
                'Avarage in stock games by manufacturer']
-
     while True:
         try:
             ui.print_menu("Store manager", options, "Back to menu")
@@ -101,8 +100,8 @@ def add(table):
     """
 
     title_list = ['ID', 'Title', 'Manufacturer', 'Price', 'In stock']
-
-    return common.all_add(table, title_list)
+    column_number_list = [3, 4]
+    return common.all_add(table, title_list, column_number_list)
 
 
 def remove(table, id_):
@@ -143,8 +142,8 @@ def update(table, id_):
     """
 
     title_list = ['ID', 'Title', 'Manufacturer', 'Price', 'In stock']
-
-    return common.all_update(table, id_, title_list)
+    column_number_list = [3, 4]
+    return common.all_update(table, id_, title_list, column_number_list)
 
 
 # special functions:
