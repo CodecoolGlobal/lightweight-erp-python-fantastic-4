@@ -115,8 +115,26 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
     Returns:
         tuple: Tuple of customer id and the sum the customer spent eg.: (aH34Jq#&, 42)
     """
+    sales_cust_id_column = 6
+    sales_price_column = 2
+    customers = {}
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    for line in sales_table:
+        if line[sales_cust_id_column] not in customers:
+            customers[line[sales_cust_id_column]] = int(
+                line[sales_price_column])
+        else:
+            customers[line[sales_cust_id_column]
+                      ] += int(line[sales_price_column])
+    max_item = 0
+    max_id = ''
+    for item in customers.items():
+        if item[1] > max_item:
+            max_item = item[1]
+            max_id = item[0]
+    max_customer = (max_id, max_item)
 
-    # your code
+    return max_customer
 
 
 def get_the_most_frequent_buyers_names(num=1):
