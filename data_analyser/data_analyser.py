@@ -13,6 +13,7 @@ import ui
 import common
 from sales import sales
 from crm import crm
+import data_manager
 
 
 def start_module():
@@ -102,5 +103,27 @@ def get_the_most_frequent_buyers_ids(num=1):
         list of tuples: Ordered list of tuples of customer ids and num of sales
             The first one bought the most frequent. eg.: [(aH34Jq#&, 8), (bH34Jq#&, 3)]
     """
+    cust_id_column = 6
+    customers = {}
+    customers_list = []
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    for line in filecontent:
+        if line[cust_id_column] not in customers:
+            customers[line[cust_id_column]] = 1
+        else:
+            customers[line[cust_id_column]] += 1
 
+    for customer in range(num):
+        max_item = 0
+        max_id = ''
+        for item in customers.items():
+            if item[1] > max_item:
+                max_item = item[1]
+                max_id = item[0]
+        customers_list.append((max_id, max_item))
+        customers.pop(max_id)
     # your code
+    return customers_list
+
+
+print(get_the_most_frequent_buyers_ids(2))
