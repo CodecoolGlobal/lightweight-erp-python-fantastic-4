@@ -232,7 +232,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
 
 def get_title_by_id(id):
-    
     """
     Reads the table with the help of the data_manager module.
     Returns the title (str) of the item with the given id (str) on None om case of non-existing id.
@@ -251,6 +250,7 @@ def get_title_by_id(id):
         if line[id_column] == id:
             return line[title_column]
     return None
+
 
 def get_title_by_id_from_table(table, id):
     """
@@ -288,7 +288,8 @@ def get_item_id_sold_last():
     all_date_list = []
     filecontent = data_manager.get_table_from_file('sales/sales.csv')
     for line in filecontent:
-        date = line[month_column] + ";" + line[day_column] + ";" + line[year_column]
+        date = line[month_column] + ";" + \
+            line[day_column] + ";" + line[year_column]
         all_date_list.append(date)
     dates_sorted_ = common.my_sort_(all_date_list)
     latest_date = dates_sorted_[0]
@@ -460,7 +461,16 @@ def get_num_of_sales_per_customer_ids():
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
 
-    # your code
+    sales_cust_id_column = 6
+    customers = {}
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    for line in sales_table:
+        if line[sales_cust_id_column] not in customers:
+            customers[line[sales_cust_id_column]] = 1
+        else:
+            customers[line[sales_cust_id_column]] += 1
+
+    return customers
 
 
 def get_num_of_sales_per_customer_ids_from_table(table):
@@ -474,4 +484,12 @@ def get_num_of_sales_per_customer_ids_from_table(table):
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
 
-    # your code
+    sales_cust_id_column = 6
+    customers = {}
+    for line in table:
+        if line[sales_cust_id_column] not in customers:
+            customers[line[sales_cust_id_column]] = 1
+        else:
+            customers[line[sales_cust_id_column]] += 1
+
+    return customers
