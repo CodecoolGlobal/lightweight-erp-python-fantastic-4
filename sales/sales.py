@@ -317,8 +317,28 @@ def get_item_id_sold_last_from_table(table):
     Returns:
         str: the _id_ of the item that was sold most recently.
     """
+    filecontent = table
+    month = 3
+    day = 4
+    year = 5
+    all_date_list = []
+    for line in filecontent:
+        date = line[month] + ";" + line[day] + ";" + line[year]
+        all_date_list.append(date)
+    dates_sorted_ = common.my_sort_(all_date_list)
+    latest_date = dates_sorted_[0]
+    latest_dates_list = latest_date.split(';')
 
-    # your code
+    item_id_sold_last = 0
+    day = 1
+    month = 0
+    year = 2
+    for data in filecontent:
+        if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
+            output = data[item_id_sold_last]
+    ui.print_result(output, 'Last sold item ID is: ')
+
+    return output
 
 
 def get_item_title_sold_last_from_table(table):
