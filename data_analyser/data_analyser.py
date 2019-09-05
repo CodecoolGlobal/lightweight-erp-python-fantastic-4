@@ -63,6 +63,36 @@ def get_the_last_buyer_name():
     Returns:
         str: Customer name of the last buyer
     """
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    month = 3
+    day = 4
+    year = 5
+    all_date_list = []
+
+    for line in filecontent:
+        date = line[month] + ";" + line[day] + ";" + line[year]
+        all_date_list.append(date)
+    dates_sorted_ = common.my_sort_(all_date_list)
+    latest_date = dates_sorted_[0]
+    latest_dates_list = latest_date.split(';')
+
+    costumer_id_index = 6
+    day = 1
+    month = 0
+    year = 2
+    for data in filecontent:
+        if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
+            costumer_id = data[costumer_id_index]
+
+    crm_filecontent = data_manager.get_table_from_file('crm/customers.csv')
+
+    customer_name_index = 1
+    for line in crm_filecontent:
+        if costumer_id in line:
+            output = line[customer_name_index]
+
+    ui.print_result(output, "The last buyers name is: ")
+    return output
 
 
 def get_the_last_buyer_id():

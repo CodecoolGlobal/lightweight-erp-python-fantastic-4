@@ -232,7 +232,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
 
 def get_title_by_id(id):
-    
     """
     Reads the table with the help of the data_manager module.
     Returns the title (str) of the item with the given id (str) on None om case of non-existing id.
@@ -282,7 +281,30 @@ def get_item_id_sold_last():
         str: the _id_ of the item that was sold most recently.
     """
 
-    # your code
+    id_column = 0
+    month_column = 3
+    day_column = 4
+    year_column = 5
+    all_date_list = []
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    for line in filecontent:
+        date = line[month_column] + ";" + \
+            line[day_column] + ";" + line[year_column]
+        all_date_list.append(date)
+    dates_sorted_ = common.my_sort_(all_date_list)
+    latest_date = dates_sorted_[0]
+    latest_dates_list = latest_date.split(';')
+
+    item_id_index = 0
+    month = 0
+    day = 1
+    year = 2
+    for data in filecontent:
+        if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
+            output = data[item_id_index]
+    ui.print_result(output, "Last item's ID is: ")
+
+    return output
 
 
 def get_item_id_sold_last_from_table(table):
@@ -296,29 +318,7 @@ def get_item_id_sold_last_from_table(table):
         str: the _id_ of the item that was sold most recently.
     """
 
-    filecontent = data_manager.get_table_from_file('sales/sales.csv')
-    month = 3
-    day = 4
-    year = 5
-    all_date_list = []
-
-    for line in filecontent:
-        date = line[month] + ";" + line[day] + ";" + line[year]
-        all_date_list.append(date)
-    dates_sorted_ = common.my_sort_(all_date_list)
-    latest_date = dates_sorted_[0]
-    latest_dates_list = latest_date.split(';')
-
-    item_id_index = 0
-    day = 1
-    month = 0
-    year = 2
-    for data in filecontent:
-        if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
-            output = data[item_id_index]
-    ui.print_result(output, 'Last sold item ID is: ')
-
-    return output
+    # your code
 
 
 def get_item_title_sold_last_from_table(table):
@@ -399,7 +399,13 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    sale_id_column = 0
+    customer_column = 6
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    for line in filecontent:
+        if line[sale_id_column] == sale_id:
+            return line[customer_column]
+    return None
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -487,7 +493,16 @@ def get_num_of_sales_per_customer_ids():
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
 
-    # your code
+    sales_cust_id_column = 6
+    customers = {}
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    for line in sales_table:
+        if line[sales_cust_id_column] not in customers:
+            customers[line[sales_cust_id_column]] = 1
+        else:
+            customers[line[sales_cust_id_column]] += 1
+
+    return customers
 
 
 def get_num_of_sales_per_customer_ids_from_table(table):
@@ -501,4 +516,12 @@ def get_num_of_sales_per_customer_ids_from_table(table):
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
 
-    # your code
+    sales_cust_id_column = 6
+    customers = {}
+    for line in table:
+        if line[sales_cust_id_column] not in customers:
+            customers[line[sales_cust_id_column]] = 1
+        else:
+            customers[line[sales_cust_id_column]] += 1
+
+    return customers
