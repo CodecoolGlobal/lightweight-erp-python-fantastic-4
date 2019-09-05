@@ -105,7 +105,36 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
     Returns:
         tuple: Tuple of customer name and the sum the customer spent eg.: ('Daniele Coach', 42)
     """
-    # your code
+    sales_cust_id_column = 6
+    sales_price_column = 2
+    customers = {}
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    for line in sales_table:
+        if line[sales_cust_id_column] not in customers:
+            customers[line[sales_cust_id_column]] = int(
+                line[sales_price_column])
+        else:
+            customers[line[sales_cust_id_column]
+                      ] += int(line[sales_price_column])
+    max_item = 0
+    max_id = ''
+    for item in customers.items():
+        if item[1] > max_item:
+            max_item = item[1]
+            max_id = item[0]
+    max_customer = [max_id, max_item]
+
+    crm_id_column = 0
+    crm_customer_name_column = 1
+    crm_table = data_manager.get_table_from_file('crm/customers.csv')
+
+    for line in crm_table:
+        if max_customer[0] == line[crm_id_column]:
+            max_customer[0] = line[crm_customer_name_column]
+            max_customer = (
+                max_customer[0], max_customer[1])
+            break
+    return max_customer
 
 
 def get_the_buyer_id_spent_most_and_the_money_spent():
@@ -132,7 +161,7 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
         if item[1] > max_item:
             max_item = item[1]
             max_id = item[0]
-    max_customer = (max_id, max_item)
+            max_customer = (max_id, max_item)
 
     return max_customer
 
