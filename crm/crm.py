@@ -224,4 +224,11 @@ def get_name_by_id_from_table(table, id):
         str: the name of the customer
     """
 
+    id_column = 0
+    name_column = 1
+    for line in table:
+        if line[id_column] == id:
+            return line[name_column]
+    return None
+
     # your code
