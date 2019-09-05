@@ -281,7 +281,29 @@ def get_item_id_sold_last():
         str: the _id_ of the item that was sold most recently.
     """
 
-    # your code
+    id_column = 0
+    month_column = 3
+    day_column = 4
+    year_column = 5
+    all_date_list = []
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    for line in filecontent:
+        date = line[month_column] + ";" + line[day_column] + ";" + line[year_column]
+        all_date_list.append(date)
+    dates_sorted_ = common.my_sort_(all_date_list)
+    latest_date = dates_sorted_[0]
+    latest_dates_list = latest_date.split(';')
+
+    item_id_index = 0
+    month = 0
+    day = 1
+    year = 2
+    for data in filecontent:
+        if latest_dates_list[month_column] in data and latest_dates_list[day_column] in data and latest_dates_list[year_column] in data:
+            output = data[item_id_index]
+    ui.print_result(output, "Last item's ID is: ")
+
+    return output
 
 
 def get_item_id_sold_last_from_table(table):
