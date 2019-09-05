@@ -13,6 +13,7 @@ import ui
 import common
 from sales import sales
 from crm import crm
+import data_manager
 
 
 def start_module():
@@ -34,9 +35,9 @@ def start_module():
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             if option == "1":
-                pass
+                get_the_last_buyer_name()
             elif option == "2":
-                pass
+                get_the_last_buyer_id()
             elif option == "3":
                 pass
             elif option == "4":
@@ -63,8 +64,6 @@ def get_the_last_buyer_name():
         str: Customer name of the last buyer
     """
 
-    # your code
-
 
 def get_the_last_buyer_id():
     """
@@ -74,7 +73,29 @@ def get_the_last_buyer_id():
         str: Customer id of the last buyer
     """
 
-    # your code
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    month = 3
+    day = 4
+    year = 5
+    all_date_list = []
+
+    for line in filecontent:
+        date = line[month] + ";" + line[day] + ";" + line[year]
+        all_date_list.append(date)
+    dates_sorted_ = common.my_sort_(all_date_list)
+    latest_date = dates_sorted_[0]
+    latest_dates_list = latest_date.split(';')
+
+    costumer_id_index = 6
+    day = 1
+    month = 0
+    year = 2
+    for data in filecontent:
+        if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
+            output = data[costumer_id_index]
+    ui.print_result(output, 'Last buyers ID is: ')
+
+    return output
 
 
 def get_the_buyer_name_spent_most_and_the_money_spent():
@@ -84,7 +105,6 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
     Returns:
         tuple: Tuple of customer name and the sum the customer spent eg.: ('Daniele Coach', 42)
     """
-
     # your code
 
 
