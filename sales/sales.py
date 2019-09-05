@@ -281,7 +281,6 @@ def get_item_id_sold_last():
         str: the _id_ of the item that was sold most recently.
     """
 
-    id_column = 0
     month_column = 3
     day_column = 4
     year_column = 5
@@ -372,7 +371,6 @@ def get_item_title_sold_last_from_table(table):
     for data in filecontent:
         if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
             output = data[item_title_last_sold]
-    ui.print_result(output, 'Last sold item title is: ')
 
     return output
 
@@ -431,7 +429,6 @@ def get_the_sum_of_prices_from_table(table, item_ids):
         price_sum += price
 
     return price_sum
-
 
 
 def get_customer_id_by_sale_id(sale_id):
