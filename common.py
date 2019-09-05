@@ -181,17 +181,11 @@ def string_value_converter_nest(nested_int_list):
     return nested_temp
 
 
-def all_add(table, title_list, column_numbers=[]):
+def all_add(table, title_list):
     title_list.pop(0)
     for item_index, item in enumerate(title_list):
         title_list[item_index] += ': '
     new_line = ui.get_inputs(title_list, 'Enter the following items')
-
-    if column_numbers != []:
-        for number in column_numbers:
-            if new_line[number - 1].isdigit() is False:
-                raise KeyError("Please enter a valid input")
-
     new_line.insert(0, generate_random(table))
     table.append(new_line)
     return table
@@ -212,7 +206,7 @@ def all_remove(table, id_):
     return table
 
 
-def all_update(table, id_, title_list, column_numbers=[]):
+def all_update(table, id_, title_list):
     id_found = False
     title_list.pop(0)
     for item_index, item in enumerate(title_list):
@@ -228,10 +222,5 @@ def all_update(table, id_, title_list, column_numbers=[]):
 
     if id_found is False:
         raise KeyError('ID not found')
-
-    if column_numbers != []:
-        for number in column_numbers:
-            if new_line[number].isdigit() is False:
-                raise KeyError("Please enter a valid input")
 
     return table

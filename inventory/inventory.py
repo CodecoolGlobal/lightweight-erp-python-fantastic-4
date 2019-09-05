@@ -99,8 +99,8 @@ def add(table):
         list: Table with a new record
     """
     title_list = ['ID', 'Name', 'Manufacturer', 'Purchase year', 'Durability']
-    column_number_list = [3, 4]
-    return common.all_add(table, title_list, column_number_list)
+
+    return common.all_add(table, title_list)
 
 
 def remove(table, id_):
@@ -130,8 +130,8 @@ def update(table, id_):
         list: table with updated record
     """
     title_list = ['ID', 'Name', 'Manufacturer', 'Purchase year', 'Durability']
-    column_number_list = [3, 4]
-    return common.all_update(table, id_, title_list, column_number_list)
+
+    return common.all_update(table, id_, title_list)
 
 
 # special functions:

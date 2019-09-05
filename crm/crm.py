@@ -97,8 +97,8 @@ def add(table):
     """
 
     title_list = ['ID', 'Name', 'Email', 'Subscribed']
-    column_number_list = [3]
-    return common.all_add(table, title_list, column_number_list)
+
+    return common.all_add(table, title_list)
 
 
 def remove(table, id_):
@@ -129,8 +129,8 @@ def update(table, id_):
     """
 
     title_list = ['ID', 'Name', 'Email', 'Subscribed']
-    column_number_list = [3]
-    return common.all_update(table, id_, title_list, column_number_list)
+
+    return common.all_update(table, id_, title_list)
 
 
 # special functions:
