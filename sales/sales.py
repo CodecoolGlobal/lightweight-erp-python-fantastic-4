@@ -34,7 +34,14 @@ def start_module():
     show_table(filename)
     options = ['Add record', 'Remove record', 'Update record',
                'ID of lowest price item', 'Items sold between inverval',
-               'Get the title by ID']
+               'Get the title by ID', 'Get the title by ID from table', 
+               'Get item ID sold last', 'Get item ID sold last from table',
+               'Get item title sold last from table', 'Get the sum of prices',
+               'Get the sum of prices from table', 'Get customer ID by sale ID',
+               'Get customer ID by sale ID from table', 'Get all customer IDs',
+               'Get all customer IDs from table', 'Get all sales IDs for customer IDs',
+               'Get all sales IDs for customer IDs from table', 'Get number of sales per customer IDs',
+               'Get number of sales per customer IDs from table']
     while True:
         try:
             ui.print_menu("Sales manager", options, "Back to menu")
@@ -88,6 +95,10 @@ def start_module():
                         six_input = False
                     except TypeError as err:
                         ui.print_error_message(err)
+                ui.get_inputs([''], 'Press Enter to continue')
+
+            elif option == '7':
+                pass
             elif option == "0":
                 break
             elif option == '':
