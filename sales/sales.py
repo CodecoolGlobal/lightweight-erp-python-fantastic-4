@@ -33,7 +33,8 @@ def start_module():
     filename = 'sales/sales.csv'
     show_table(filename)
     options = ['Add record', 'Remove record', 'Update record',
-               'ID of lowest price item', 'Items sold between inverval']
+               'ID of lowest price item', 'Items sold between inverval',
+               'Get the title by ID']
     while True:
         try:
             ui.print_menu("Sales manager", options, "Back to menu")
@@ -78,6 +79,15 @@ def start_module():
                     str(to_date[1]) + '.' + str(to_date[2]) + ':'
                 )
                 ui.get_inputs([''], 'Press Enter to continue')
+            elif option == '6':
+                six_input = True
+                while six_input:
+                    try:
+                        input_id = ui.get_inputs(['ID: '], 'Type the ID that you would like to get.')
+                        ui.print_result(get_title_by_id(input_id), "Result is: ")
+                        six_input = False
+                    except TypeError as err:
+                        ui.print_error_message(err)
             elif option == "0":
                 break
             elif option == '':
