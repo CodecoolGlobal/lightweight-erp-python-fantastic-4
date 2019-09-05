@@ -26,7 +26,6 @@ def start_module():
         None
     """
 
-<<<<<<< HEAD
     options = ['Get the last buyer name', 'Get the last buyer ID', 'Buyer who spent most and the money used',
                'Buyer ID who spent most and the money used', 'Most frequent buyers name',
                'Most frequent buyers ID']
@@ -53,9 +52,6 @@ def start_module():
                 raise KeyError("There is no such option.")
         except KeyError as err:
             ui.print_error_message(str(err))
-=======
-    # your code
->>>>>>> 086836650044d939f32f3e03bec533c8ada105f1
 
     pass
 
