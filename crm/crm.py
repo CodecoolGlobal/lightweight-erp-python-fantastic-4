@@ -203,8 +203,13 @@ def get_name_by_id(id):
     Returns:
         str: the name of the customer
     """
-
-    # your code
+    id_column = 0
+    name_column = 1
+    filecontent = data_manager.get_table_from_file('crm/customers.csv')
+    for line in filecontent:
+        if line[id_column] == id:
+            return line[name_column]
+    return None
 
 
 def get_name_by_id_from_table(table, id):
