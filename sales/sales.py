@@ -450,7 +450,12 @@ def get_all_customer_ids():
          set of str: set of customer_ids that are present in the table
     """
 
-    # your code
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    customer_id_index = 6
+    result = set()
+    for line in filecontent:
+        result.add(line[customer_id_index])
+    return result
 
 
 def get_all_customer_ids_from_table(table):
