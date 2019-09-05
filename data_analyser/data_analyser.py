@@ -89,6 +89,38 @@ def get_the_most_frequent_buyers_names(num=1):
     """
 
     # your code
+    sales_cust_id_column = 6
+    customers = {}
+    customers_list = []
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    for line in sales_table:
+        if line[sales_cust_id_column] not in customers:
+            customers[line[sales_cust_id_column]] = 1
+        else:
+            customers[line[sales_cust_id_column]] += 1
+
+    for customer in range(num):
+        max_item = 0
+        max_id = ''
+        for item in customers.items():
+            if item[1] > max_item:
+                max_item = item[1]
+                max_id = item[0]
+        customers_list.append([max_id, max_item])
+        customers.pop(max_id)
+
+    crm_id_column = 0
+    crm_customer_name_column = 1
+    crm_table = data_manager.get_table_from_file('crm/customers.csv')
+
+    for index, item in enumerate(customers_list):
+        for line in crm_table:
+            if item[0] == line[crm_id_column]:
+                customers_list[index][0] = line[crm_customer_name_column]
+                customers_list[index] = (
+                    customers_list[index][0], customers_list[index][1])
+                break
+    return customers_list
 
 
 def get_the_most_frequent_buyers_ids(num=1):
