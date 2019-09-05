@@ -377,7 +377,13 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    sale_id_column = 0
+    customer_column = 6
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    for line in filecontent:
+        if line[sale_id_column] == sale_id:
+            return line[customer_column]
+    return None
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
