@@ -402,7 +402,6 @@ def get_the_sum_of_prices(item_ids):
         price = int(price)
         price_sum += price
 
-    ui.print_result(price_sum, "The sum of the ID's prices is: ")
     return price_sum
 
 
@@ -418,7 +417,21 @@ def get_the_sum_of_prices_from_table(table, item_ids):
         number: the sum of the items' prices
     """
 
-    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    prices_list = []
+    price_index = 2
+    for item_id in item_ids:
+        for line in table:
+            if item_id in line:
+                prices_list.append(line[price_index])
+
+    price_sum = 0
+    for price in prices_list:
+        price = int(price)
+        price_sum += price
+
+    return price_sum
+
 
 
 def get_customer_id_by_sale_id(sale_id):
