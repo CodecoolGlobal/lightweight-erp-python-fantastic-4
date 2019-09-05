@@ -431,7 +431,16 @@ def get_all_sales_ids_for_customer_ids():
          (dict of (key, value): (customer_id, (list) sale_ids)) where the sale_ids list contains
             all the sales id belong to the given customer_id
     """
-
+    id_pairs = {}
+    ids = 0
+    customer_id = 6
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    for line in sales_table:
+        if line[customer_id] not in id_pairs:
+            id_pairs[line[customer_id]] = [line[ids]]
+        else:
+            id_pairs[line[customer_id]].append(line[ids])
+    return id_pairs
     # your code
 
 
@@ -448,7 +457,15 @@ def get_all_sales_ids_for_customer_ids_from_table(table):
          all the sales id belong to the given customer_id
     """
 
-    # your code
+    id_pairs = {}
+    ids = 0
+    customer_id = 6
+    for line in table:
+        if line[customer_id] not in id_pairs:
+            id_pairs[line[customer_id]] = [line[ids]]
+        else:
+            id_pairs[line[customer_id]].append(line[ids])
+    return id_pairs
 
 
 def get_num_of_sales_per_customer_ids():
