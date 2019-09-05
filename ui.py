@@ -78,6 +78,8 @@ def print_result(result, label):
         print(label + result)
     elif result == []:
         print('\nNo result')
+    elif isinstance(result, tuple):
+        print(result)
     elif isinstance(result, list) and isinstance(result[0], list):
         string_result = common.string_value_converter_nest(result)
         fake_title = string_result.pop(0)
