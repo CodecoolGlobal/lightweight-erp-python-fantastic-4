@@ -124,6 +124,3 @@ def get_the_most_frequent_buyers_ids(num=1):
         customers.pop(max_id)
     # your code
     return customers_list
-
-
-print(get_the_most_frequent_buyers_ids(2))
