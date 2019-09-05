@@ -332,7 +332,29 @@ def get_item_title_sold_last_from_table(table):
         str: the _title_ of the item that was sold most recently.
     """
 
-    # your code
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    month = 3
+    day = 4
+    year = 5
+    all_date_list = []
+
+    for line in filecontent:
+        date = line[month] + ";" + line[day] + ";" + line[year]
+        all_date_list.append(date)
+    dates_sorted_ = common.my_sort_(all_date_list)
+    latest_date = dates_sorted_[0]
+    latest_dates_list = latest_date.split(';')
+
+    item_title_last_sold = 1
+    day = 1
+    month = 0
+    year = 2
+    for data in filecontent:
+        if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
+            output = data[item_title_last_sold]
+    ui.print_result(output, 'Last sold item title is: ')
+
+    return output
 
 
 def get_the_sum_of_prices(item_ids):
@@ -347,7 +369,21 @@ def get_the_sum_of_prices(item_ids):
         number: the sum of the items' prices
     """
 
-    # your code
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    prices_list = []
+    price_index = 2
+    for item_id in item_ids:
+        for line in filecontent:
+            if item_id in line:
+                prices_list.append(line[price_index])
+
+    price_sum = 0
+    for price in prices_list:
+        price = int(price)
+        price_sum += price
+
+    ui.print_result(price_sum, "The sum of the ID's prices is: ")
+    return price_sum
 
 
 def get_the_sum_of_prices_from_table(table, item_ids):
@@ -362,7 +398,7 @@ def get_the_sum_of_prices_from_table(table, item_ids):
         number: the sum of the items' prices
     """
 
-    # your code
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
 
 
 def get_customer_id_by_sale_id(sale_id):
@@ -377,7 +413,13 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    sale_id_column = 0
+    customer_column = 6
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    for line in filecontent:
+        if line[sale_id_column] == sale_id:
+            return line[customer_column]
+    return None
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -392,7 +434,12 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
         str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    sale_id_column = 0
+    customer_id_column = 6
+    for line in table:
+        if line[sale_id_column] == sale_id:
+            return line[customer_id_column]
+    return None
 
 
 def get_all_customer_ids():
@@ -403,7 +450,12 @@ def get_all_customer_ids():
          set of str: set of customer_ids that are present in the table
     """
 
-    # your code
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    customer_id_index = 6
+    result = set()
+    for line in filecontent:
+        result.add(line[customer_id_index])
+    return result
 
 
 def get_all_customer_ids_from_table(table):
@@ -415,8 +467,12 @@ def get_all_customer_ids_from_table(table):
     Returns:
          set of str: set of customer_ids that are present in the table
     """
-
-    # your code
+    filecontent = data_manager.get_table_from_file('sales/sales.csv')
+    result = set()
+    customer_id_index = 6
+    for line in filecontent:
+        result.add(line[customer_id_index])
+    return result
 
 
 def get_all_sales_ids_for_customer_ids():
