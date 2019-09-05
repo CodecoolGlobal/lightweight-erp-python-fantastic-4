@@ -35,15 +35,22 @@ def start_module():
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             if option == "1":
-                get_the_last_buyer_name()
+                ui.print_result(get_the_last_buyer_name(),
+                                'The last buyer name:')
             elif option == "2":
-                get_the_last_buyer_id()
+                ui.print_result(get_the_last_buyer_id(), 'The last buyer ID:')
             elif option == "3":
-                pass
+                ui.print_result(get_the_buyer_name_spent_most_and_the_money_spent(
+                ), 'The buyer who spent most and the money used:')
             elif option == "4":
-                pass
+                ui.print_result(get_the_buyer_id_spent_most_and_the_money_spent(
+                ), 'The buyer ID who spent most and the money used')
             elif option == "5":
-                pass
+                ui.print_result(get_the_most_frequent_buyers_names(),
+                                'Most frequent buyers name:')
+            elif option == "6":
+                ui.print_result(get_the_most_frequent_buyers_ids(),
+                                'Most frequent buyers ID:')
             elif option == "0":
                 break
             elif option == '':
@@ -91,7 +98,6 @@ def get_the_last_buyer_name():
         if costumer_id in line:
             output = line[customer_name_index]
 
-    ui.print_result(output, "The last buyers name is: ")
     return output
 
 
@@ -123,7 +129,6 @@ def get_the_last_buyer_id():
     for data in filecontent:
         if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
             output = data[costumer_id_index]
-    ui.print_result(output, 'Last buyers ID is: ')
 
     return output
 
