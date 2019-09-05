@@ -25,7 +25,32 @@ def start_module():
         None
     """
 
-    # your code
+    options = ['Get the last buyer name', 'Get the last buyer ID', 'Buyer who spent most and the money used',
+               'Buyer ID who spent most and the money used', 'Most frequent buyers name',
+               'Most frequent buyers ID']
+    while True:
+        try:
+            ui.print_menu("Data Analyser", options, "Back to menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                pass
+            elif option == "2":
+                pass
+            elif option == "3":
+                pass
+            elif option == "4":
+                pass
+            elif option == "5":
+                pass
+            elif option == "0":
+                break
+            elif option == '':
+                raise KeyError("Please enter a valid input")
+            else:
+                raise KeyError("There is no such option.")
+        except KeyError as err:
+            ui.print_error_message(str(err))
 
     pass
 
