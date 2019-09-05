@@ -300,7 +300,7 @@ def get_item_id_sold_last():
     day = 1
     year = 2
     for data in filecontent:
-        if latest_dates_list[month_column] in data and latest_dates_list[day_column] in data and latest_dates_list[year_column] in data:
+        if latest_dates_list[month] in data and latest_dates_list[day] in data and latest_dates_list[year] in data:
             output = data[item_id_index]
     ui.print_result(output, "Last item's ID is: ")
 
